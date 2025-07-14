@@ -42,3 +42,7 @@ or install on linux🐧 with <br>
 <br>
 ```flask run --host your.ip.if.youwant```
 
+<br><br>
+<img src="screenshot.png" alt="screenshot%20do%20SITE" align="center"/>
+
+---
