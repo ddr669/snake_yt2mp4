@@ -1,9 +1,9 @@
 # snake_yt2mp4 🐍
 ---
 <br>
-<img src="https://img.shields.io/badge/python-3.13.5-blue" alt="badge-python-3.13.5" width="20px" height="20px" align="left"/>
-<img src="https://img.shields.io/badge/flask-3.1.1-green" alt="badge-flask-3.1.1" width="20px" height="20px" align="left"/>
-<img src="https://img.shields.io/badge/ffmpeg-7.1.1-red" alt="badge-ffmpeg-7.1.1" width="20px" height="20px" align="left"/>
+<img src="https://img.shields.io/badge/python-3.13.5-blue" alt="badge-python-3.13.5" width="50px" height="50px" align="left"/>
+<img src="https://img.shields.io/badge/flask-3.1.1-green" alt="badge-flask-3.1.1" width="50px" height="50px" align="left"/>
+<img src="https://img.shields.io/badge/ffmpeg-7.1.1-red" alt="badge-ffmpeg-7.1.1" width="50px" height="50px" align="left"/>
 <br><br>
 
 a simple 🟢 webservice with flask that download files in youtube by a link given by the user and make the video with ffmpeg to more quality.
