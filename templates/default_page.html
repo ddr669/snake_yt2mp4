@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>- py2mp4 -</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_01.css')}}">
+    
+    {% block head %} {% endblock %}
+</head>
+<body>
+
+    
+    <div class="header">
+        <p class="LOGO">- Py2mp4 -</p>
+    </div>
+    
+
+    <div class="corpo">
+        <form action="/downloads/{{yt_url}}" method="POST">
+            <input type="text" name="yt_url" id="yt_url" placeholder="Cole uma url aqui" required>
+            <button type="submit">Baixar</button>
+        </form>
+    {% block body %}{% endblock %}
+    </div>
+    <script src="{{ url_for('static', filename='scripts_01.js')}}"> 
+    </script>
+
+    
+
+</body>
+</html>

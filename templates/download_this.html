@@ -1,0 +1,24 @@
+{% extends 'default_page.html' %}
+
+
+{% block head %}
+{% endblock %}
+
+
+{% block body %}
+<div>
+    <h2>{{ video_name }}</h2>
+    <img src="{{ video_thumb }}" alt="video_thumbnail" width="90px" height="60px">
+    <h3>Autor: {{ author }} </h3>
+    <form action="/now/" method="POST">
+        <label for="botao_download">
+            <div style="width: 40svw; height: 50px; background-color: brown;text-align: center;">
+                <h2>clique aqui!</h2>
+            </div>
+        </label>
+        <button type="submit" name="botao_download" id="botao_download" value="{{ FFCMD }}" style="width: 40svw;height: 10svh;">Download</button>
+    </form>
+    
+
+</div>
+{% endblock %}
