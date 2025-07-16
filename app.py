@@ -11,6 +11,11 @@ def home():
     return render_template("index.html", display_="display: none;")
 @app.route("/downloads/", methods=["POST"])
 def get_video():
+    '''
+        TODO: token para acessar a pagina de download apenas quando houver requisição de video 
+        Para evitar baixar diversas vezes mesmo só ao atualizar
+    '''
+    
     _dict_res = request.form
     linkzao = _dict_res["yt_url"] 
     #video, thumb = Download_youtube(linkzao)
