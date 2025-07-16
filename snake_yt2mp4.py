@@ -9,8 +9,9 @@ from os import system, listdir
 import subprocess as SUB
 from random import randint
 
+# 
 def get_video_values(link):
-    youtube_obj = YouTube(link)
+    youtube_obj = YouTube(link, use_oauth=True, allow_oauth_cache=True)
     output = Download_youtube(youtube_obj)
     return {'title': youtube_obj.title,
             'autor': youtube_obj.author,
@@ -37,13 +38,14 @@ def Download_youtube(youtube_object: YouTube):
     video_stream = youtube_object.streams.filter(adaptive=True, file_extension="mp4", only_video=True).order_by("resolution").desc().first()
     audio_stream = youtube_object.streams.filter(adaptive=True, file_extension="mp4", only_audio=True).order_by("abr").desc().first()
     # limpa o titulo para evitar nomes impossiveis 
-    titulo = youtube_object.title.split(" ")
+    titulo = youtube_object.title
     tit = ""
     for _ in titulo:
+        _ = "_" if _ == " " else _
         tit += _.strip() if _ not in ["|", "/", "%", "\\", "$", "&", ".", ",", ";", ":", "?", "#", "&", "@"] else ""
     titulo = tit
     # sobrescreve o titulo com a variavel temporaria limpa 
-    magic_number = f"{titulo.strip(" ")}-{randint(0,0)}{randint(0, 9)}{randint(0, 9)}{randint(0, 9)}"
+    magic_number = f"{titulo.strip(" ")}"
     # numeros magicos para evitar sobrescrever videos e audios ! pode ser relevante ou não, tudo depende do intuito 
     if not video_stream or not audio_stream:
         print("Não foi possivel encontrar o video.")
@@ -51,7 +53,7 @@ def Download_youtube(youtube_object: YouTube):
     # Arquivos de saida 
     # default path: mp4_files/output.mp4 | mp4_files/separados/audio.mp4 
     video_file = f"video_{magic_number}.mp4"
-    audio_file = f"audio_{magic_number}.mp4"
+    audio_file = f"audio_{magic_number}.mp3"
     output_file = f"mp4_files/{titulo}.mp4"
 
     # faz o download para depois juntar com ffmpeg
