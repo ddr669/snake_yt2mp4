@@ -4,21 +4,22 @@ import json
 
 app = Flask(__name__)
 
-
-
 @app.route("/")
 def home():
     return render_template("index.html", display_="display: none;")
+
 @app.route("/downloads/", methods=["POST"])
 def get_video():
     '''
         TODO: token para acessar a pagina de download apenas quando houver requisição de video 
         Para evitar baixar diversas vezes mesmo só ao atualizar
     '''
-    
-    _dict_res = request.form
-    linkzao = _dict_res["yt_url"] 
-    #video, thumb = Download_youtube(linkzao)
+	# TODO tratar request 
+	
+    req = request.form
+	
+	# integraçaõ com pytube
+    linkzao = req["yt_url"]
     values = get_video_values(linkzao)
    
     return render_template("download_this.html", 
@@ -34,16 +35,15 @@ def download_now():
     video_link = request.form
     _ = ""
     if "botao_download" in video_link:
-        vi_ = video_link['botao_download']
-       
-        vi_.replace("'", '"')
-        print(vi_)
-        vi_ = json.loads(vi_.replace("'", '"'))    
-        print(vi_)
-        mount_video(output_file=vi_['out'],video_file=vi_['video'], audio_file=vi_['audio'])
-    #aoba = video_link["values"]
+        video = video_link['botao_download']
+        video.replace("'", '"')
+        print(video)
+        video = json.loads(video.replace("'", '"'))    
+        print(video)
+		input("calabreso")
+        mount_video(output_file=video['out'],video_file=video['video'], audio_file=video['audio'])
     
-    return send_file(vi_['out'], as_attachment=True)
+    return send_file(video['out'], as_attachment=True)
     
 
 if __name__ == "__main__":
