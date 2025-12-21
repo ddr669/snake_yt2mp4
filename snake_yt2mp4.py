@@ -1,7 +1,5 @@
 #!/bin/venv python
 #-*-encode: utf-8-*-
-#-*-
-####################
 
 from pytubefix import YouTube
 from sys import argv 
@@ -9,18 +7,21 @@ from os import system, listdir
 import subprocess as SUB
 from random import randint
 
-# 
+USE_OAUTH = False
+
 def get_video_values(link):
-    youtube_obj = YouTube(link, use_oauth=True, allow_oauth_cache=True)
-    output = Download_youtube(youtube_obj)
-    return {'title': youtube_obj.title,
+	global USE_OAUTH
+	
+	youtube_obj = YouTube(link, use_oauth=USE_OAUTH, allow_oauth_cache=True)
+	output = Download_youtube(youtube_obj)
+
+	return {'title': youtube_obj.title,
             'autor': youtube_obj.author,
             'thumb': youtube_obj.thumbnail_url,
             'Object': youtube_obj,
             'FFCMD': output}
 
 def mount_video(output_file: str,video_file: str, audio_file: str):
-    
     video_file = f"mp4_files/separados/"+video_file
     audio_file = f"mp4_files/separados/"+audio_file
     # certifica de estar tudo correto 
@@ -32,12 +33,10 @@ def mount_video(output_file: str,video_file: str, audio_file: str):
     # comando executando em background 
    
 
-def Download_youtube(youtube_object: YouTube):
-    
+def Download_youtube(youtube_object: YouTube): 
     # baixa audio e video separado para manter a qualidade do video
     video_stream = youtube_object.streams.filter(adaptive=True, file_extension="mp4", only_video=True).order_by("resolution").desc().first()
     audio_stream = youtube_object.streams.filter(adaptive=True, file_extension="mp4", only_audio=True).order_by("abr").desc().first()
-    # limpa o titulo para evitar nomes impossiveis 
     titulo = youtube_object.title
     tit = ""
     for _ in titulo:
@@ -61,8 +60,7 @@ def Download_youtube(youtube_object: YouTube):
     audio_stream.download(output_path="mp4_files/separados", filename=audio_file)
     # excluir arquivos extras depois, não coloquei essa função por motivos de usar os arquivos de musica solta
     return {"out":output_file,"video":video_file,"audio":audio_file}
-##################################
-## não usado para o serviço http/web com flask 
+
 def __help__():
     print("use:>  snake_yt2mp4.py https://youtube.com/watch?q=Whe34ad2")
     print()
