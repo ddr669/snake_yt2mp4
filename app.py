@@ -21,7 +21,7 @@ def get_video():
 	# integraçaõ com pytube
     linkzao = req["yt_url"]
     values = get_video_values(linkzao)
-   
+
     return render_template("download_this.html", 
                            video_name=values['title'], 
                            video_thumb=values['thumb'],
@@ -40,7 +40,7 @@ def download_now():
         print(video)
         video = json.loads(video.replace("'", '"'))    
         print(video)
-		input("calabreso")
+        #input("calabreso")
         mount_video(output_file=video['out'],video_file=video['video'], audio_file=video['audio'])
     
     return send_file(video['out'], as_attachment=True)
